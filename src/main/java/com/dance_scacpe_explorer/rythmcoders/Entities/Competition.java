@@ -34,4 +34,13 @@ public class Competition implements Serializable {
     @OneToMany(cascade = CascadeType.ALL)
     private Set<Multimedia> multimedia;
 
+    @OneToOne(mappedBy = "competition")
+    private User user;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<DanceCategory> danceCategories;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Feedback> feedback;
+
 }

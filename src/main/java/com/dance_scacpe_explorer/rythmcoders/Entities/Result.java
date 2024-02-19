@@ -3,32 +3,23 @@ package com.dance_scacpe_explorer.rythmcoders.Entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Getter
+@Entity
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @ToString
-@Entity
-public class DanceSchool {
+public class Result implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    private Long id;
-
-    private String name;
-    private String position;
-    private String horaire;
-
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Course> courses;
-
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Feedback> feedbacks;
+    private Long ResultId;
 
     @ManyToMany(cascade = CascadeType.ALL)
     private List<User> users;
-
 }

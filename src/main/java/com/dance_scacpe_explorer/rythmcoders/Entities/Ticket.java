@@ -34,4 +34,7 @@ public class Ticket implements Serializable {
 
     @OneToOne
     private Payment payment;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    private User user;
 }
