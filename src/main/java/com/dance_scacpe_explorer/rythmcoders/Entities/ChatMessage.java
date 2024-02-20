@@ -21,5 +21,5 @@ public class ChatMessage implements Serializable {
     private LocalDateTime messageDate;
 
     @ManyToOne
-    private User sender;
+    private User user;
 }
