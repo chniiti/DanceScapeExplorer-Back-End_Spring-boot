@@ -28,7 +28,7 @@ public class ForumPost implements Serializable {
     @OneToMany( cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private User user;
 
     @JsonIgnore

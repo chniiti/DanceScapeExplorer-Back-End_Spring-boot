@@ -36,7 +36,7 @@ public class User implements Serializable {
     @OneToMany(cascade= CascadeType.ALL, mappedBy = "user")
     private List<ForumPost> forumPosts;
 
-    @OneToMany(cascade = CascadeType.ALL )
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<ChatRoom> chatRooms;
 
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "users")
