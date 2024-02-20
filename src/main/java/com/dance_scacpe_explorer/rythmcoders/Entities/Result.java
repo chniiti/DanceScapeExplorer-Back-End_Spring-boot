@@ -21,5 +21,5 @@ public class Result implements Serializable {
     private Long ResultId;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    private List<User> users;
+    private List<User> resUsers;
 }

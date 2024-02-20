@@ -29,6 +29,6 @@ public class DanceSchool {
     private List<Feedback> feedbacks;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    private List<User> users;
+    private List<User> dsUsers;
 
 }

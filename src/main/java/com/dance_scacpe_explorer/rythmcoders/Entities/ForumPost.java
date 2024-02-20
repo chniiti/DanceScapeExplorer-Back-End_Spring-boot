@@ -24,14 +24,14 @@ public class ForumPost implements Serializable {
     private String title;
     private String content;
     private LocalDate postDate;
-    @JsonIgnore
+
     @OneToMany( cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
 
     @ManyToOne
-    private User user;
+    private User author;
 
-    @JsonIgnore
+
     @OneToMany(cascade = CascadeType.ALL)
     private Set<React> reacts ;
 
