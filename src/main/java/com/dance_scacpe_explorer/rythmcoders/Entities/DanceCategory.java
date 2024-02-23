@@ -1,6 +1,8 @@
 package com.dance_scacpe_explorer.rythmcoders.Entities;
 import jakarta.persistence.*;
+import lombok.*;
 
+import java.io.Serializable;
 import java.util.List;
 
 
@@ -8,7 +10,12 @@ import java.util.List;
 
 
 @Entity
-public class DanceCategory {
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+public class DanceCategory implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

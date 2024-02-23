@@ -25,22 +25,23 @@ public class Competition implements Serializable {
     private Date date;
     private String Rules;
 
-    @OneToMany (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany (cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "competition")
     private Set<Ticket> tickets;
 
     @OneToOne
     private DanceVenue danceVenue;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "competition")
     private Set<Multimedia> multimedia;
 
-    @OneToOne(mappedBy = "competition")
-    private User user;
+    @ManyToMany
+    private List<User> userCompetition;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "competition")
     private List<DanceCategory> danceCategories;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "competition")
     private List<Feedback> feedback;
+
 
 }

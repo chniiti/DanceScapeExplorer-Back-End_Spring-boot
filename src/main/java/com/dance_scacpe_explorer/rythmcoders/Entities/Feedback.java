@@ -26,5 +26,5 @@ public class Feedback implements Serializable {
     private Competition competition;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    private DanceSchool danceSchool;
+    private DanceSchool danceschool;
 }

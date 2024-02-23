@@ -22,10 +22,10 @@ public class DanceSchool {
     private String position;
     private String horaire;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "danceschool")
     private List<Course> courses;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "danceschool")
     private List<Feedback> feedbacks;
 
     @ManyToMany(cascade = CascadeType.ALL)

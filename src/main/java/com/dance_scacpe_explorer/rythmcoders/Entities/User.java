@@ -47,5 +47,15 @@ public class User implements Serializable {
     @ManyToMany(cascade = CascadeType.ALL , mappedBy = "resUsers")
     private List<Result> resultats;
 
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "userCompetition")
+   private List<Competition> competitions;
+
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "userRole")
+    @JoinTable(
+            name = "user_userrole",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "userrole_id")
+    )
+    private List<UserRole> userRoles;
 
 }
