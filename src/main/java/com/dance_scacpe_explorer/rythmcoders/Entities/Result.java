@@ -20,11 +20,6 @@ public class Result implements Serializable {
 
     private Long ResultId;
 
-<<<<<<< Updated upstream
-    @ManyToMany(cascade = CascadeType.ALL)
-    private List<User> users;
-=======
     @ManyToMany
     private List<User> resUsers;
->>>>>>> Stashed changes
 }

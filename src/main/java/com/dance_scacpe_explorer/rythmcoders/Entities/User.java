@@ -39,12 +39,9 @@ public class User implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<ChatRoom> chatRooms;
-<<<<<<< Updated upstream
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "users")
-=======
+
     @ManyToMany
->>>>>>> Stashed changes
     private  List<DanceSchool> danceSchools;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
@@ -53,15 +50,9 @@ public class User implements Serializable {
     @ManyToMany(cascade = CascadeType.ALL , mappedBy = "users")
     private List<Result> resultats;
 
-<<<<<<< Updated upstream
-    @OneToOne
-    private Competition competition;
-=======
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> Roles;
-
->>>>>>> Stashed changes
 }
