@@ -47,10 +47,10 @@ public class User implements Serializable {
     @ManyToMany(cascade = CascadeType.ALL , mappedBy = "resUsers")
     private List<Result> resultats;
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "userCompetition")
+    @ManyToMany(cascade = CascadeType.ALL)
    private List<Competition> competitions;
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "userRole")
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "user_userrole",
             joinColumns = @JoinColumn(name = "user_id"),
