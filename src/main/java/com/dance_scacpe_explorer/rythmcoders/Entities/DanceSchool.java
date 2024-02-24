@@ -28,7 +28,12 @@ public class DanceSchool {
     @OneToMany(cascade = CascadeType.ALL)
     private List<Feedback> feedbacks;
 
+<<<<<<< Updated upstream
     @ManyToMany(cascade = CascadeType.ALL)
     private List<User> users;
+=======
+    @ManyToMany(mappedBy = "danceSchools")
+    private List<User> dsUsers;
+>>>>>>> Stashed changes
 
 }

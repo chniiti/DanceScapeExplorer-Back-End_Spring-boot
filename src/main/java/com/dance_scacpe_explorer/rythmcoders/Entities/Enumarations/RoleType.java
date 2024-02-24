@@ -1,6 +1,6 @@
 package com.dance_scacpe_explorer.rythmcoders.Entities.Enumarations;
 
-public enum Role {
+public enum RoleType {
     ADMIN,
     PARTICIPANT,
     JUDGE,

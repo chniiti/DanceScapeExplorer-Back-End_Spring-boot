@@ -23,8 +23,6 @@ public class ChatRoom implements Serializable {
     @ManyToOne
     private User user;
 
-    @ManyToMany
-    private List<User> participants;
 
     @OneToMany
     private List<ChatMessage> chatMessages  = new ArrayList<>();

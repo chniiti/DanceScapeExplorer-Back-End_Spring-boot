@@ -1,30 +1,27 @@
 package com.dance_scacpe_explorer.rythmcoders.Entities;
 
+import com.dance_scacpe_explorer.rythmcoders.Entities.Enumarations.RoleType;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
 import java.util.List;
 
-@Getter
 @Entity
+@Getter
 @Setter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-@ToString
-public class Result implements Serializable {
 
+public class Role implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    private Long ResultId;
+    private Long roleId;
+    @Enumerated(EnumType.STRING)
+    private RoleType roleType;
 
-<<<<<<< Updated upstream
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "Roles")
     private List<User> users;
-=======
-    @ManyToMany
-    private List<User> resUsers;
->>>>>>> Stashed changes
 }
