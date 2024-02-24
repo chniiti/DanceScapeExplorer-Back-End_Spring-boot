@@ -21,7 +21,7 @@ public class ChatRoom implements Serializable {
     private String roomName;
 
     @ManyToOne
-    private User user;
+    private User creator;
 
 
     @OneToMany

@@ -29,12 +29,11 @@ public class ForumPost implements Serializable {
     private List<Comment> comments = new ArrayList<>();
 
     @ManyToOne
-    private User user;
+    private User author;
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL)
     private Set<React> reacts ;
-
     @ManyToOne(cascade = CascadeType.ALL)
     private Comment comment;
 }

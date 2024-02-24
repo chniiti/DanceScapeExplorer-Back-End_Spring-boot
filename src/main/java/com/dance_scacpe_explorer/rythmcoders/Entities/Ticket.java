@@ -36,9 +36,5 @@ public class Ticket implements Serializable {
     private Payment payment;
 
     @ManyToOne
-<<<<<<< Updated upstream
-    private User user;
-=======
     private User buyer;
->>>>>>> Stashed changes
 }

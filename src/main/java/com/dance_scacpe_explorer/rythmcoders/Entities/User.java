@@ -33,23 +33,21 @@ public class User implements Serializable {
     private String password;
     @NonNull
     private Integer phoneNumber;
-
-    @OneToMany(cascade= CascadeType.ALL, mappedBy = "user")
+    ///////
+    @OneToMany(cascade= CascadeType.ALL, mappedBy = "author")
     private List<ForumPost> forumPosts;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "creator")
     private List<ChatRoom> chatRooms;
 
-
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "dsUsers")
     private  List<DanceSchool> danceSchools;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "buyer")
     private List<Ticket> tickets;
 
-    @ManyToMany(cascade = CascadeType.ALL , mappedBy = "users")
+    @ManyToMany(cascade = CascadeType.ALL , mappedBy = "resUsers")
     private List<Result> resultats;
-
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
