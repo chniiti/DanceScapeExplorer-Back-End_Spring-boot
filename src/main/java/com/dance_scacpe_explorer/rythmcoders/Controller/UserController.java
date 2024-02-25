@@ -20,6 +20,7 @@ public class UserController {
     @Autowired
     UserService userService;
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+    ///ADD USER
     @PostMapping("/addUser")
     public ResponseEntity addUserResponse(@RequestBody User user){
      try {
@@ -31,14 +32,17 @@ public class UserController {
          return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
      }
     }
+    //GET ALL
     @GetMapping("/getAllUsers")
     public List<User> getAllUsers(){
         return userService.getAllUsers();
     }
+    // GET ONE
     @GetMapping("/getUserById/{userId}")
     public User getUserById(@PathVariable Long userId){
         return userService.getUserById(userId);
     }
+    // DELETE
     @DeleteMapping("/deleteUser/{userId}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long userId) {
         if (userService.deleteUser(userId)) {
@@ -48,5 +52,17 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+    // UPDATE
+    @PutMapping("/updateUser/{userId}")
+    public ResponseEntity<User> updateUser(@PathVariable Long userId, @RequestBody User updatedUser) {
+        try {
+            User user = userService.updateUser(userId, updatedUser);
+            return ResponseEntity.ok().body(user);
+        } catch (UserException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
 
 }

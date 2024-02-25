@@ -33,13 +33,7 @@ public class Competition implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL)
     private Set<Multimedia> multimedia;
-
-<<<<<<< Updated upstream
-    @OneToOne(mappedBy = "competition")
-    private User user;
-=======
-
->>>>>>> Stashed changes
+    
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<DanceCategory> danceCategories;

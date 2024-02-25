@@ -61,6 +61,19 @@ public class UserService {
             return false;
         }
     }
+    public User updateUser(Long userId, User updateuser) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new UserException("User not found with id: " + userId));
+        user.setFirstName(updateuser.getFirstName());
+        user.setLastName(updateuser.getLastName());
+        user.setEmail(updateuser.getEmail());
+        user.setBirthday(updateuser.getBirthday());
+        user.setPhoneNumber(updateuser.getPhoneNumber());
+        user.setPassword(updateuser.getPassword());
+
+        // Save the updated user
+        return userRepository.save(user);
+    }
 
 
 
