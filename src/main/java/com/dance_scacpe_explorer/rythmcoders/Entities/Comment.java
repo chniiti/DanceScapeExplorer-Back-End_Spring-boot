@@ -33,6 +33,6 @@ public class Comment implements Serializable {
 
 
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private Set<ForumPost> forumPosts ;
+    @ManyToOne
+    private ForumPost forumPost ;
 }

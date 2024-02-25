@@ -1,6 +1,6 @@
 package com.dance_scacpe_explorer.rythmcoders.Entities;
 
-import com.dance_scacpe_explorer.rythmcoders.Entities.Enumarations.RoleType;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.*;
@@ -47,7 +47,7 @@ public class User implements Serializable {
     private List<Ticket> tickets;
 
     @ManyToMany(cascade = CascadeType.ALL , mappedBy = "resUsers")
-    private List<Result> resultats;
+    private List<Result> results;
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
