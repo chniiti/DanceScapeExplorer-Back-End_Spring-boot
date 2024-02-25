@@ -33,7 +33,7 @@ public class Competition implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL)
     private Set<Multimedia> multimedia;
-    
+
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<DanceCategory> danceCategories;
