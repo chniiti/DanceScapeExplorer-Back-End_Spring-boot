@@ -18,7 +18,7 @@ public class Course {
     private String name;
     private String instructor;
     private String schedule;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "dance_school_id") // Assuming the column name in Course table
     private DanceSchool danceSchool;
 

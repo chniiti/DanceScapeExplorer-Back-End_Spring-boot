@@ -23,6 +23,6 @@ public class React implements Serializable {
 
 
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    private ForumPost postForumPost;
+    @ManyToOne
+    private ForumPost ForumPost;
 }

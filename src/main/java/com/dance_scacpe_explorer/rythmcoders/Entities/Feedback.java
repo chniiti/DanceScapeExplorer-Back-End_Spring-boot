@@ -22,9 +22,11 @@ public class Feedback implements Serializable {
     @Enumerated(EnumType.STRING)
     private FeedbackType feedbackType;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Competition competition;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private DanceSchool danceSchool;
+    ///
+
 }

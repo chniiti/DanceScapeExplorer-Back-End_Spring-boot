@@ -27,11 +27,11 @@ public class Comment implements Serializable {
     private LocalDate postDate;
 
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "comment")
     private List<ReactComment> reactComments = new ArrayList<>();
 
-
-
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "parentComment")
+    private List<SousComment> sousComments = new ArrayList<>();
 
     @ManyToOne
     private ForumPost forumPost ;

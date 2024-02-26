@@ -23,7 +23,12 @@ public class DanceCategory {
     @OneToMany(mappedBy = "danceCategory", cascade = CascadeType.ALL)
     private List<DanceStyle> danceStyles;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Competition competition;
+
+
+
+
+
 
 }

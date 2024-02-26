@@ -24,7 +24,7 @@ public class ChatRoom implements Serializable {
     private User creator;
 
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "chatroom")
     private List<ChatMessage> chatMessages  = new ArrayList<>();
 
 }

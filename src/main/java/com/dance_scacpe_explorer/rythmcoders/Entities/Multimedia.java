@@ -26,6 +26,6 @@ public class Multimedia implements Serializable {
     @Enumerated(EnumType.STRING)
     private FileType fileType;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Competition competition;
 }

@@ -21,9 +21,6 @@ public class SousComment implements SecureRandomParameters {
     private LocalDate commentDate;
 
     @ManyToOne
-    private User author;
-
-    @ManyToOne
     @JoinColumn(name = "comment_id")
     private Comment parentComment;
 }

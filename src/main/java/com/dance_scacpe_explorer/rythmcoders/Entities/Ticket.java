@@ -29,9 +29,6 @@ public class Ticket implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL)
     private Competition competition;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    private DanceVenue danceVenue;
-
     @OneToOne
     private Payment payment;
 
