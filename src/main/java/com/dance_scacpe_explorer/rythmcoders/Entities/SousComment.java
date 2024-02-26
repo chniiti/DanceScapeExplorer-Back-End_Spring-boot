@@ -3,6 +3,7 @@ package com.dance_scacpe_explorer.rythmcoders.Entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
 import java.security.SecureRandomParameters;
 import java.time.LocalDate;
 
@@ -13,7 +14,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Builder
 @ToString
-public class SousComment implements SecureRandomParameters {
+public class SousComment implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long scommentId;
