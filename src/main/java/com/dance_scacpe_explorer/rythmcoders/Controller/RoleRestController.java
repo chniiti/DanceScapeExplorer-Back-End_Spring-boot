@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/role")
 public class RoleRestController {
     @Autowired
     RoleIService roleIService;
@@ -13,9 +14,9 @@ public class RoleRestController {
     public void addRole(@RequestBody Role r){
         roleIService.addRole(r);
     }
-    @GetMapping("/getRoleById")
-    public Role getRoleById(long id){
-        return roleIService.findRoleById(id);
+    @GetMapping("/getRoleById/{roleId}")
+    public Role getRoleById(@PathVariable  long roleId){
+        return roleIService.findRoleById(roleId);
     }
     @PutMapping("/updateRole")
     public void updateRole(@RequestBody Role role){

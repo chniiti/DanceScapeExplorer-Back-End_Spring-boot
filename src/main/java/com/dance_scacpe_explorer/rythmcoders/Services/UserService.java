@@ -1,4 +1,6 @@
 package com.dance_scacpe_explorer.rythmcoders.Services;
+import com.dance_scacpe_explorer.rythmcoders.Entities.Role;
+import com.dance_scacpe_explorer.rythmcoders.Repositories.RoleRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -13,12 +15,15 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class UserService {
 
+    @Autowired
+    RoleRepository roleRepository;
     @Autowired
     UserRepository userRepository;
     @Autowired
@@ -73,6 +78,12 @@ public class UserService {
 
         // Save the updated user
         return userRepository.save(user);
+    }
+    public void affecterUserToRole(Long userId, long roleId) {
+        Role role = roleRepository.findById(roleId).get();
+        User user = userRepository.findById(userId).get();
+        user.getRoles().add(role);
+        userRepository.save(user);
     }
 
 

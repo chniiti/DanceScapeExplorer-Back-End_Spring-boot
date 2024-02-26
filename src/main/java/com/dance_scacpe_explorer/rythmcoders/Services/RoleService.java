@@ -17,8 +17,8 @@ public class RoleService implements RoleIService{
         roleRepository.save(role);
     }
     @Override
-    public Role findRoleById(long id) {
-        return roleRepository.findById(id).get();
+    public Role findRoleById(long roleId) {
+        return roleRepository.findById(roleId).get();
     }
 
     @Override

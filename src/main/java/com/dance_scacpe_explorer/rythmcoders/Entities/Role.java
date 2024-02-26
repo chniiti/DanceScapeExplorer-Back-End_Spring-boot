@@ -19,9 +19,10 @@ public class Role implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Long roleId;
-    @Enumerated(EnumType.STRING)
-    private RoleType roleType;
 
-    @ManyToMany(mappedBy = "Roles")
-    private List<User> users;
+    private String  roleName;
+
+public Role(String roleName){
+    this.roleName = roleName;
+}
 }

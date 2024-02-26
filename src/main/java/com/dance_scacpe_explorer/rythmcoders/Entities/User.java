@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Email;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -24,14 +25,14 @@ public class User implements Serializable {
     private String firstName;
     @NonNull
     private String lastName;
-    @NonNull
+
     private Date birthday;
     @NonNull
     @Email
     private String email;
     @NonNull
     private String password;
-    @NonNull
+
     private Integer phoneNumber;
     ///////
     @OneToMany(cascade= CascadeType.ALL, mappedBy = "author")
@@ -48,9 +49,11 @@ public class User implements Serializable {
 
     @ManyToMany(cascade = CascadeType.ALL , mappedBy = "resUsers")
     private List<Result> results;
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> Roles;
+
+
 }

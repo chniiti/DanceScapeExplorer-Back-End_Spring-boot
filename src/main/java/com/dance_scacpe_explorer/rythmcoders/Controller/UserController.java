@@ -65,4 +65,10 @@ public class UserController {
 
 
 
+    @PostMapping("/users/{userId}/roles/{roleId}")
+    public void affecterUserToRole(@PathVariable Long userId, @PathVariable Long roleId) {
+        userService.affecterUserToRole(userId, roleId);
+    }
+
+
 }
