@@ -33,6 +33,10 @@ public class User implements Serializable {
     @NonNull
     private String password;
 
+    @Lob
+    @Column(columnDefinition = "MEDIUMBLOB")
+    private byte[] image;
+
     private Integer phoneNumber;
     ///////
     @OneToMany(cascade= CascadeType.ALL, mappedBy = "author")

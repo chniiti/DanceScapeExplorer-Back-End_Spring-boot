@@ -21,10 +21,9 @@ import java.util.Set;
 public class Comment implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long postId;
-    private String title;
+    private Long commentId;
     private String content;
-    private LocalDate postDate;
+    private LocalDate commentDate;
 
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "comment")

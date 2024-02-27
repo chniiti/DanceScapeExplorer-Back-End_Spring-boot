@@ -48,7 +48,6 @@ public class UserController {
         if (userService.deleteUser(userId)) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
-            // Handle not found case
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }

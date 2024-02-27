@@ -14,11 +14,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-
+import java.util.*;
+import java.util.Base64;
 @Service
 public class UserService {
 
@@ -41,6 +38,9 @@ public class UserService {
         newUser.setBirthday(user.getBirthday());
         newUser.setPassword(passwordEncoder.encode(user.getPassword()));
         newUser.setPhoneNumber(user.getPhoneNumber());
+        if (user.getImage() != null){
+            newUser.setImage(Base64.getDecoder().decode(user.getImage()));
+        }
         return userRepository.save(newUser);
 
     }
@@ -85,6 +85,8 @@ public class UserService {
         user.getRoles().add(role);
         userRepository.save(user);
     }
+
+
 
 
 

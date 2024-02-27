@@ -27,17 +27,20 @@ public class Initialize implements CommandLineRunner {
         if (adminRole == null){
             adminRole = new Role ("admin");
             roleRepository.save(adminRole);
+            User adminUser = userRepository.findByEmail("admin@admin.com");
+            if (adminUser == null){
+                adminUser = new User();
+                adminUser.setFirstName("admin");
+                adminUser.setLastName("admin");
+                adminUser.setEmail("admin@admin.com");
+                adminUser.setPassword("admin");
+                userRepository.save(adminUser);
+                affecterUserToRole(adminUser.getUserId(), adminRole.getRoleId());
+            }
+
         }
-        User adminUser = userRepository.findByEmail("admin@admin.com");
-        if (adminUser == null){
-            adminUser = new User();
-            adminUser.setFirstName("admin");
-            adminUser.setLastName("admin");
-            adminUser.setEmail("admin@admin.com");
-            adminUser.setPassword("admin");
-            userRepository.save(adminUser);
-        }
-        affecterUserToRole(adminUser.getUserId(), adminRole.getRoleId());
+
+
     }
     public void affecterUserToRole(Long userId, long roleId) {
         Role role = roleRepository.findById(roleId).get();
