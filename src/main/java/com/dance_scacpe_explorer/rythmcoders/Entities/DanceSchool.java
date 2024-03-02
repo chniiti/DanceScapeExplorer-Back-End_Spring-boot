@@ -1,0 +1,34 @@
+package com.dance_scacpe_explorer.rythmcoders.Entities;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.util.List;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+@Entity
+public class DanceSchool {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    private Long id;
+
+    private String name;
+    private String position;
+    private String horaire;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "danceschool")
+    private List<Course> courses;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "danceschool")
+    private List<Feedback> feedbacks;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<User> dsUsers;
+
+}
