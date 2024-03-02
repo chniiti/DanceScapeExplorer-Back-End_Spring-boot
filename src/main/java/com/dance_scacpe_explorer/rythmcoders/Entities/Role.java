@@ -1,11 +1,9 @@
 package com.dance_scacpe_explorer.rythmcoders.Entities;
 
-import com.dance_scacpe_explorer.rythmcoders.Entities.Enumarations.RoleType;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
 @Getter

@@ -32,6 +32,6 @@ public class Ticket implements Serializable {
     @OneToOne
     private Payment payment;
 
-    @ManyToOne
+    @OneToOne
     private User buyer;
 }

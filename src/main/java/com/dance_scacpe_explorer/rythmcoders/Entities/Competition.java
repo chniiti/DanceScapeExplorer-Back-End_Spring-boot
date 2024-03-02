@@ -25,8 +25,9 @@ public class Competition implements Serializable {
     private Date date;
     private String Rules;
 
-    @OneToMany (cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "competition")
-    private Set<Ticket> tickets;
+    @ManyToOne
+    @JoinColumn(name = "competitor_id")
+    private User competitor;
 
     @OneToOne
     private DanceVenue danceVenue;

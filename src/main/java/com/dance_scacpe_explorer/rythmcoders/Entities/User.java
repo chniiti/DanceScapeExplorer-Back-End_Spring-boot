@@ -48,11 +48,15 @@ public class User implements Serializable {
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "dsUsers")
     private  List<DanceSchool> danceSchools;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "buyer")
-    private List<Ticket> tickets;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "buyer")
+    private Ticket ticket;
+
+    @OneToMany (mappedBy = "competitor",cascade = CascadeType.ALL)
+    private List<Competition> competitions;
 
     @ManyToMany(cascade = CascadeType.ALL , mappedBy = "resUsers")
     private List<Result> results;
+
     @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
