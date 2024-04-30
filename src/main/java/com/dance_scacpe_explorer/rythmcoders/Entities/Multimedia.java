@@ -20,9 +20,17 @@ public class Multimedia implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    private Long mulitimediaId;
-    @Temporal(TemporalType.DATE)
-    private Date uploadDate;
+    private Long id_multimedia;
+    private String name;
+    private String videoUrl;
+    private String videoId;
+
+    public Multimedia(String name, String videoUrl, String videoId){
+        this.name=name;
+        this.videoUrl=videoUrl;
+        this.videoId=videoId;
+    }
+
     @Enumerated(EnumType.STRING)
         private FileType fileType;
 

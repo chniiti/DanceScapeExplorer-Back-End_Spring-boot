@@ -16,8 +16,8 @@ import java.util.List;
 @ToString
 public class User implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer userId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long userId;
     private Role role;
     @NonNull
     private String firstName;

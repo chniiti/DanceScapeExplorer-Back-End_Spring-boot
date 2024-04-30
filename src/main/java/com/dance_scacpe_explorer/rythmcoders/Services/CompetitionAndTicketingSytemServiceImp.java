@@ -1,16 +1,32 @@
 package com.dance_scacpe_explorer.rythmcoders.Services;
 
+import com.cloudinary.Cloudinary;
 import com.dance_scacpe_explorer.rythmcoders.Entities.*;
+import com.dance_scacpe_explorer.rythmcoders.Entities.Enumarations.FileType;
 import com.dance_scacpe_explorer.rythmcoders.Repositories.*;
+import jakarta.transaction.Transactional;
+import org.springframework.core.io.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.multipart.MultipartFile;
+import reactor.core.publisher.Mono;
 
 import javax.swing.text.html.parser.Entity;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.sql.ClientInfoStatus;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -26,6 +42,14 @@ public class CompetitionAndTicketingSytemServiceImp implements CompetitionAndTic
     PaymentRepository paymentRepository;
     @Autowired
     TicketRepository ticketRepository;
+    @Autowired
+    UserRepository userRepository;
+    @Autowired
+    private ResourceLoader resourceLoader;
+    @Autowired
+    private UploadRepository uploadRepository;
+
+    private static final String FILE_PATH="file:///C:/Users/PC/Videos/%s.mp4";
 
 
     //Competition functions
@@ -33,6 +57,7 @@ public class CompetitionAndTicketingSytemServiceImp implements CompetitionAndTic
     public Competition addCompetiton(Competition competition) {
         return competitionRepository.save(competition);
     }
+
 
     @Override
     public Competition getCompetitionById(Long competitionId) {
@@ -72,81 +97,95 @@ public class CompetitionAndTicketingSytemServiceImp implements CompetitionAndTic
         }
     }
 
-    //DanceVenue functions
+    @Override
+    public void joinCompetition(Competition competition, User participant) {
+        User LoggedInParticipant= userRepository.findById(participant.getUserId()).orElse(null);
+        if(LoggedInParticipant==null){
+            throw new IllegalArgumentException("Participant not found");
+        }
+        Competition existingCompetition=competitionRepository.findById(competition.getCompetitionId()).orElse(null);
+        if(existingCompetition==null){
+            throw new IllegalArgumentException("Competition not found");
+        }
+        //add user to the competition's list of participant
+        List<User> participants=existingCompetition.getUserCompetition();
+        participants.add(LoggedInParticipant);
+        existingCompetition.setUserCompetition(participants);
+        competitionRepository.save(existingCompetition);
+    }
+
+    @Override
+    public void affectCompetitionToADanceVenue(Long IdCompetition, Long IdDanceVenue) {
+        Competition c=competitionRepository.findById(IdCompetition).get();
+        DanceVenue danceVenue=danceVenueRepository.findById(IdDanceVenue).get();
+        c.setDanceVenue(danceVenue);
+        competitionRepository.save(c);
+    }
+
+    @Override
+    public Competition getByDanceVenue(Long danceVenueId) {
+        return competitionRepository.getCompetitionByDanceVenue_DanceVenueId(danceVenueId);
+    }
+
+    // DanceVenue functions
     @Override
     public DanceVenue addDanceVenue(DanceVenue danceVenue) {
         return danceVenueRepository.save(danceVenue);
     }
+
     @Override
-    public DanceVenue getDanceVenueById(Long DanceVenueId) {
-        return danceVenueRepository.findById(DanceVenueId).orElse(null);
+    public DanceVenue getDanceVenueById(Long danceVenueId) {
+        return danceVenueRepository.findById(danceVenueId).orElse(null);
     }
+
     @Override
     public List<DanceVenue> getAllDanceVenues() {
         return danceVenueRepository.findAll();
     }
+
     @Override
     public ResponseEntity<String> updateDanceVenue(Long id, DanceVenue updatedDanceVenue) {
         Optional<DanceVenue> existingDanceVenue = danceVenueRepository.findById(id);
         if (existingDanceVenue.isPresent()) {
             DanceVenue danceVenue = existingDanceVenue.get();
-            danceVenue.setName(danceVenue.getName());
-            danceVenue.setNumberOfSeat((danceVenue.getNumberOfSeat()));
+            danceVenue.setName(updatedDanceVenue.getName());
+            danceVenue.setNumberOfSeat(updatedDanceVenue.getNumberOfSeat());
 
-        danceVenueRepository.save(updatedDanceVenue);
-        return ResponseEntity.ok("dance venue updated successfully");
-    }else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("dance venue not found");
+            danceVenueRepository.save(danceVenue);
+            return ResponseEntity.ok("Dance venue updated successfully");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Dance venue not found");
         }
     }
+
     @Override
     public boolean deleteDanceVenue(Long id) {
-        Optional<DanceVenue> danceVenueOptional= danceVenueRepository.findById(id);
-        if (danceVenueOptional.isPresent()){
-            danceVenueRepository.delete(danceVenueOptional.get());
-            return true;
-        }else {
-            return false;
-        }
+        Optional<DanceVenue> danceVenueOptional = danceVenueRepository.findById(id);
+        danceVenueOptional.ifPresent(danceVenueRepository::delete);
+        return danceVenueOptional.isPresent();
     }
 
     //Multimedia functions
-    @Override
-    public Multimedia addMultimedia(Multimedia multimedia) {
-        return multimediaRepository.save(multimedia);
-    }
+
+
     @Override
     public List<Multimedia> gelAllMultimedias() {
         return multimediaRepository.findAll();
     }
     @Override
-    public Multimedia getById(Long multimediaId) {
+    public Multimedia getMultimediaById(Long multimediaId) {
         return multimediaRepository.findById(multimediaId).orElse(null);
     }
-
     @Override
-    public ResponseEntity<String> updateMultimedia(Long id, Multimedia updatedMultimedia) {
-        Optional<Multimedia> existingMultimedia=multimediaRepository.findById(id);
-        if(existingMultimedia.isPresent()) {
-            Multimedia multimedia = existingMultimedia.get();
-            multimedia.setUploadDate(multimedia.getUploadDate());
-            multimediaRepository.save(multimedia);
-            return ResponseEntity.ok("Multimedia updated successfully");
-        }else{
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("you file not added");
-        }
+    public void addMultimedia(Multimedia multimedia){
+        multimediaRepository.save(multimedia);
+    }
+    @Override
+    public void deleteMultimedia(Long id){
+        multimediaRepository.deleteById(id);
     }
 
-    @Override
-    public boolean deleteMultimedia(Long id) {
-        Optional<Multimedia> multimediaOptional=multimediaRepository.findById(id);
-        if(multimediaOptional.isPresent()){
-            multimediaRepository.delete(multimediaOptional.get());
-            return true;
-        }else {
-            return false;
-        }
-    }
+
 
     //Ticket functions
 
@@ -230,5 +269,26 @@ public class CompetitionAndTicketingSytemServiceImp implements CompetitionAndTic
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("payment not found");
         }
+    }
+
+
+    //Upload
+
+
+    @Override
+    @Transactional
+    public void uploadVideo(MultipartFile file) {
+        String filePath="C:/Users/PC/Desktop/uploads/"+file.getOriginalFilename();
+        try{
+            file.transferTo(new File(filePath));
+        }catch (IOException e){
+            e.printStackTrace();
+            throw new RuntimeException("Failed to upload file");
+        }
+
+        Upload video=new Upload();
+        video.setPath(filePath);
+        video.setUploadDate(LocalDateTime.now());
+        uploadRepository.save(video);
     }
 }
