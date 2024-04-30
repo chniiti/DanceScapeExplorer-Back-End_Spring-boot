@@ -1,5 +1,6 @@
 package com.dance_scacpe_explorer.rythmcoders.Services;
 
+<<<<<<< HEAD
 import com.cloudinary.Cloudinary;
 import com.dance_scacpe_explorer.rythmcoders.Entities.*;
 import com.dance_scacpe_explorer.rythmcoders.Entities.Enumarations.FileType;
@@ -8,11 +9,17 @@ import jakarta.transaction.Transactional;
 import org.springframework.core.io.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
+=======
+import com.dance_scacpe_explorer.rythmcoders.Entities.*;
+import com.dance_scacpe_explorer.rythmcoders.Repositories.*;
+import org.springframework.beans.factory.annotation.Autowired;
+>>>>>>> a76815504846741dde9236c2de3f36cddf9c96a6
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+<<<<<<< HEAD
 import org.springframework.web.multipart.MultipartFile;
 import reactor.core.publisher.Mono;
 
@@ -27,6 +34,11 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+=======
+
+import javax.swing.text.html.parser.Entity;
+import java.util.List;
+>>>>>>> a76815504846741dde9236c2de3f36cddf9c96a6
 import java.util.Optional;
 
 @Service
@@ -42,6 +54,7 @@ public class CompetitionAndTicketingSytemServiceImp implements CompetitionAndTic
     PaymentRepository paymentRepository;
     @Autowired
     TicketRepository ticketRepository;
+<<<<<<< HEAD
     @Autowired
     UserRepository userRepository;
     @Autowired
@@ -50,6 +63,8 @@ public class CompetitionAndTicketingSytemServiceImp implements CompetitionAndTic
     private UploadRepository uploadRepository;
 
     private static final String FILE_PATH="file:///C:/Users/PC/Videos/%s.mp4";
+=======
+>>>>>>> a76815504846741dde9236c2de3f36cddf9c96a6
 
 
     //Competition functions
@@ -58,7 +73,10 @@ public class CompetitionAndTicketingSytemServiceImp implements CompetitionAndTic
         return competitionRepository.save(competition);
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> a76815504846741dde9236c2de3f36cddf9c96a6
     @Override
     public Competition getCompetitionById(Long competitionId) {
         return competitionRepository.findById(competitionId).orElse(null);
@@ -97,6 +115,7 @@ public class CompetitionAndTicketingSytemServiceImp implements CompetitionAndTic
         }
     }
 
+<<<<<<< HEAD
     @Override
     public void joinCompetition(Competition competition, User participant) {
         User LoggedInParticipant= userRepository.findById(participant.getUserId()).orElse(null);
@@ -128,26 +147,40 @@ public class CompetitionAndTicketingSytemServiceImp implements CompetitionAndTic
     }
 
     // DanceVenue functions
+=======
+    //DanceVenue functions
+>>>>>>> a76815504846741dde9236c2de3f36cddf9c96a6
     @Override
     public DanceVenue addDanceVenue(DanceVenue danceVenue) {
         return danceVenueRepository.save(danceVenue);
     }
+<<<<<<< HEAD
 
     @Override
     public DanceVenue getDanceVenueById(Long danceVenueId) {
         return danceVenueRepository.findById(danceVenueId).orElse(null);
     }
 
+=======
+    @Override
+    public DanceVenue getDanceVenueById(Long DanceVenueId) {
+        return danceVenueRepository.findById(DanceVenueId).orElse(null);
+    }
+>>>>>>> a76815504846741dde9236c2de3f36cddf9c96a6
     @Override
     public List<DanceVenue> getAllDanceVenues() {
         return danceVenueRepository.findAll();
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> a76815504846741dde9236c2de3f36cddf9c96a6
     @Override
     public ResponseEntity<String> updateDanceVenue(Long id, DanceVenue updatedDanceVenue) {
         Optional<DanceVenue> existingDanceVenue = danceVenueRepository.findById(id);
         if (existingDanceVenue.isPresent()) {
             DanceVenue danceVenue = existingDanceVenue.get();
+<<<<<<< HEAD
             danceVenue.setName(updatedDanceVenue.getName());
             danceVenue.setNumberOfSeat(updatedDanceVenue.getNumberOfSeat());
 
@@ -168,11 +201,39 @@ public class CompetitionAndTicketingSytemServiceImp implements CompetitionAndTic
     //Multimedia functions
 
 
+=======
+            danceVenue.setName(danceVenue.getName());
+            danceVenue.setNumberOfSeat((danceVenue.getNumberOfSeat()));
+
+        danceVenueRepository.save(updatedDanceVenue);
+        return ResponseEntity.ok("dance venue updated successfully");
+    }else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("dance venue not found");
+        }
+    }
+    @Override
+    public boolean deleteDanceVenue(Long id) {
+        Optional<DanceVenue> danceVenueOptional= danceVenueRepository.findById(id);
+        if (danceVenueOptional.isPresent()){
+            danceVenueRepository.delete(danceVenueOptional.get());
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    //Multimedia functions
+    @Override
+    public Multimedia addMultimedia(Multimedia multimedia) {
+        return multimediaRepository.save(multimedia);
+    }
+>>>>>>> a76815504846741dde9236c2de3f36cddf9c96a6
     @Override
     public List<Multimedia> gelAllMultimedias() {
         return multimediaRepository.findAll();
     }
     @Override
+<<<<<<< HEAD
     public Multimedia getMultimediaById(Long multimediaId) {
         return multimediaRepository.findById(multimediaId).orElse(null);
     }
@@ -186,6 +247,35 @@ public class CompetitionAndTicketingSytemServiceImp implements CompetitionAndTic
     }
 
 
+=======
+    public Multimedia getById(Long multimediaId) {
+        return multimediaRepository.findById(multimediaId).orElse(null);
+    }
+
+    @Override
+    public ResponseEntity<String> updateMultimedia(Long id, Multimedia updatedMultimedia) {
+        Optional<Multimedia> existingMultimedia=multimediaRepository.findById(id);
+        if(existingMultimedia.isPresent()) {
+            Multimedia multimedia = existingMultimedia.get();
+            multimedia.setUploadDate(multimedia.getUploadDate());
+            multimediaRepository.save(multimedia);
+            return ResponseEntity.ok("Multimedia updated successfully");
+        }else{
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("you file not added");
+        }
+    }
+
+    @Override
+    public boolean deleteMultimedia(Long id) {
+        Optional<Multimedia> multimediaOptional=multimediaRepository.findById(id);
+        if(multimediaOptional.isPresent()){
+            multimediaRepository.delete(multimediaOptional.get());
+            return true;
+        }else {
+            return false;
+        }
+    }
+>>>>>>> a76815504846741dde9236c2de3f36cddf9c96a6
 
     //Ticket functions
 
@@ -270,6 +360,7 @@ public class CompetitionAndTicketingSytemServiceImp implements CompetitionAndTic
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("payment not found");
         }
     }
+<<<<<<< HEAD
 
 
     //Upload
@@ -291,4 +382,6 @@ public class CompetitionAndTicketingSytemServiceImp implements CompetitionAndTic
         video.setUploadDate(LocalDateTime.now());
         uploadRepository.save(video);
     }
+=======
+>>>>>>> a76815504846741dde9236c2de3f36cddf9c96a6
 }

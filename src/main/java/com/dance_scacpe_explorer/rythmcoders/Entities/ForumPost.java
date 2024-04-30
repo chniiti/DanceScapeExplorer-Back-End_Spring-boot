@@ -19,7 +19,11 @@ import java.util.Set;
 @ToString
 public class ForumPost implements Serializable {
     @Id
+<<<<<<< HEAD
     @GeneratedValue(strategy = GenerationType.AUTO)
+=======
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+>>>>>>> a76815504846741dde9236c2de3f36cddf9c96a6
     private Long postId;
     private String title;
     private String content;

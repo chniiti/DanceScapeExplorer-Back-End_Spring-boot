@@ -24,7 +24,11 @@ public class Ticket implements Serializable {
     @Enumerated(EnumType.STRING)
     private TicketType ticketType;
     private double price;
+<<<<<<< HEAD
     private boolean availability;
+=======
+    private String availability;
+>>>>>>> a76815504846741dde9236c2de3f36cddf9c96a6
 
     @ManyToOne(cascade = CascadeType.ALL)
     private Competition competition;

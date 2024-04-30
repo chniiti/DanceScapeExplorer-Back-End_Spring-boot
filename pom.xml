@@ -18,6 +18,7 @@
     </properties>
     <dependencies>
         <dependency>
+<<<<<<< HEAD
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
             <version>2.9.2</version>
@@ -44,6 +45,8 @@
             <version>3.4.10</version> <!-- Updated Reactor Core version -->
         </dependency>
         <dependency>
+=======
+>>>>>>> a76815504846741dde9236c2de3f36cddf9c96a6
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jdbc</artifactId>
         </dependency>

@@ -19,7 +19,10 @@ public class DanceVenue implements Serializable {
 
     private Long danceVenueId;
     private String name;
+<<<<<<< HEAD
     private String className;
+=======
+>>>>>>> a76815504846741dde9236c2de3f36cddf9c96a6
     private int numberOfSeat;
 
     @OneToMany(cascade = CascadeType.ALL)
