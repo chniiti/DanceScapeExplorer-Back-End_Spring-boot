@@ -2,27 +2,27 @@ package com.dance_scacpe_explorer.rythmcoders.Entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import java.io.Serializable;
+import java.util.Date;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Criterion implements Serializable {
 
+public class AvisScore {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String technique;
-    private String artistry;
-    private String choreography;
-    private String performanceQuality;
-    private String stagePresence;
-    private String expressionAndEmotion;
-    private String synchroAndPrecision;
+    private String likee;
+    private int rate;
+    private String description;
+    private Date date;
     @OneToOne
     @JsonIgnore
     private Score score;

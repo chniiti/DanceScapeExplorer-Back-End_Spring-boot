@@ -1,5 +1,6 @@
 package com.dance_scacpe_explorer.rythmcoders.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -34,13 +35,16 @@ public class Competition implements Serializable {
     @OneToMany(cascade = CascadeType.ALL)
     private Set<Multimedia> multimedia;
 
-    @OneToOne(mappedBy = "competition")
-    private User user;
+    @ManyToMany(mappedBy = "competition")
+    private Set<User> user;
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<DanceCategory> danceCategories;
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<Feedback> feedback;
+    @OneToOne(mappedBy = "competition",cascade = CascadeType.REMOVE,orphanRemoval = true)
+    @JsonIgnore
+    private Evaluation evaluation;
 
 }
